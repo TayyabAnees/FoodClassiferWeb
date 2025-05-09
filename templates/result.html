@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="glass-container">
+    <h1 class="main-heading">🔎 Prediction Result</h1>
+
+ {% if image_filename %}
+  <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" class="preview-img">
+  <h2>{{ label }} <span class="confidence">({{ confidence | round(2) }}%)</span></h2>
+
+  <script>
+    window.onload = function () {
+      fetch("/delete_image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ filename: "{{ image_filename }}" })
+      });
+    };
+  </script>
+{% endif %}
+
+
+    <a href="/" class="back-btn">← Try Another</a>
+  </div>
+</body>
+</html>

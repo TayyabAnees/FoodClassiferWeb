@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Food Classifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body>
+  <div class="glass-container" id="main-container">
+{#    <div class="logo-container">#}
+{#      <lottie-player#}
+{#        src="{{ url_for('static', filename='lottie/logo.json') }}"#}
+{#        background="transparent"#}
+{#        speed="1"#}
+{#        style="width: 140px; height: 140px"#}
+{#        loop autoplay>#}
+{#      </lottie-player>#}
+{#    </div>#}
+
+    <h1 class="main-heading">AI Food Classifier</h1>
+    <p class="subtitle">Instantly detect food vs non-food with advanced AI</p>
+
+    <form id="predict-form" action="/predict" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label>Upload a Single Image:</label>
+        <input type="file" name="image" accept="image/*" />
+      </div>
+      <button type="submit" class="submit-btn">🚀 Analyze Now</button>
+    </form>
+  </div>
+
+  <div id="loader" style="display: none; text-align: center;">
+    <lottie-player
+      src="{{ url_for('static', filename='lottie/loader.json') }}"
+      background="transparent"
+      speed="1"
+      style="width: 220px; height: 220px"
+      loop autoplay>
+    </lottie-player>
+  </div>
+
+  <script>
+    document.getElementById("predict-form").addEventListener("submit", () => {
+      document.getElementById("main-container").style.display = "none";
+      document.getElementById("loader").style.display = "block";
+    });
+  </script>
+</body>
+</html>
